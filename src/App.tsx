@@ -1,11 +1,12 @@
-function App() {
+import Navbar from "./components/Navbar"
+
+function App(){
+
 
   return (
-    <>
-      <p className="text-3xl font-bold underline">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main>
+        <Navbar />
+    </main>
   )
 }
 
