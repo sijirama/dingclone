@@ -9,7 +9,7 @@ function Hero() {
 
   return (
     <main className="w-full bg-white py-7 md:py-18 z-10">
-      <section className='max-w-[430px] md:max-w-[1300px] mx-auto grid md:grid-cols-2'>
+      <section className='max-w-[430px] md:max-w-[1300px] mx-auto grid lg:grid-cols-2'>
 
           <div className='flex flex-col justify-start gap-1'>
             <p className='font-rubik py-1 text-center md:text-left text-lg md:text-xl lg::text-2xl text-[#20B486] font-semibold'>START TO SUCCESS</p>
