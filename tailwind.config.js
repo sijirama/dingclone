@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        "geologica":['Geologica', 'sans-serif'],
+        "rubik":['Rubik', 'sans-serif'],
+      },
+      colors:{
+        primary:"#20B486",
+      }
+    },
   },
   plugins: [],
 }
