@@ -45,7 +45,7 @@ function Navbar() {
 
       </div>
 
-      <div className={toggle ? ("absolute z-20 p-4 px-4 w-full md:hidden") : ("hidden")} >
+      <div className={toggle ? ("absolute bg-white z-20 p-4 px-4 w-full md:hidden") : ("hidden")} >
           <ul className="">
             <li className="text-base p-2 hover:bg-gray-300 rounded-md cursor-pointer ">Home</li>
             <li className="text-base p-2 hover:bg-gray-300 rounded-md cursor-pointer ">About</li>
