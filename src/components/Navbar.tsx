@@ -32,7 +32,7 @@ function Navbar() {
           <button className="flex items-center gap-2 bg-transparent px-5 opacity-80 text-base text-center justify-center">
             <AiOutlineLock size={22} /> Login
           </button>
-          <button className="bg-[#20B486] text-white font-bold px-6 py-1 rounded-md"> Sign Up For Free</button>
+          <button className="bg-[#20B486] text-white font-bold px-6 py-1 rounded-md"> Sign up For Free</button>
         </div>
 
         <div className=" flex items-center justify-center md:hidden ">
@@ -56,7 +56,7 @@ function Navbar() {
               <button className="border border-[#20B486] rounded-md py-1 mt-3 flex items-center gap-2 bg-transparent px-5 opacity-80 text-base text-center justify-center">
                 <AiOutlineLock size={22} /> Login
               </button>
-              <button className="bg-[#20B486] text-white font-bold px-6 py-2 rounded-md"> Sign Up For Free</button>
+              <button className="bg-[#20B486] text-white font-bold px-6 py-2 rounded-md"> Sign up For Free</button>
             </div>
           </ul>             
       </div>
