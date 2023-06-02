@@ -12,10 +12,18 @@ export default function Footer() {
           <p className="text-base text-gray-600 font-light font-rubik">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla distinctio itaque nemo aspernatur corrupti nesciunt.</p>
           <p className="text-base text-gray-600 font-semibold font-rubik">Email: helloworld@gmail.com</p>
           <div className="flex justify-start gap-3 md:justify-between my-2">
-            <BsGithub size={ICON_SIZE} />
-            <BsLinkedin size={ICON_SIZE} />
-            <BsTwitter size={ICON_SIZE} />
-            <BsInstagram size={ICON_SIZE} />
+            <div className="p-3 bg-slate-300 rounded-lg shadow-sm">
+              <BsGithub size={ICON_SIZE}  className="text-primary"/>
+            </div>
+            <div className="p-3 bg-slate-300 rounded-lg shadow-sm">
+              <BsLinkedin size={ICON_SIZE}  className="text-primary"/>
+            </div>
+            <div className="p-3 bg-slate-300 rounded-lg shadow-sm">
+              <BsTwitter size={ICON_SIZE}  className="text-primary"/>
+            </div>
+            <div className="p-3 bg-slate-300 rounded-lg shadow-sm">
+              <BsInstagram size={ICON_SIZE} className="text-primary" />
+            </div>
           </div>
         </div>
         <div className='px-2 lg:px-6'>

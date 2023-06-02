@@ -13,7 +13,7 @@ function Navbar() {
       <div className="max-w-[600px] md:max-w-[1300px] mx-auto h-full flex justify-between items-center">
 
         <div className="flex items-center justify-center">
-          <p className=" my-auto mx-2 w-full h-full md:mx-0 font-bold text-4xl md:text-4xl lg:text-5xl tracking-[-0.25rem]  md:tracking-[-0.3rem]">
+          <p className=" my-auto mx-2 w-full h-full md:mx-0 font-bold text-4xl md:text-4xl lg:text-5xl  -tracking-widest md:tracking-[-0.3rem]">
             xerox
           </p>
         </div>
