@@ -10,7 +10,7 @@ export default function Achievements() {
             <h1 className='font-geologica py-2 text-center md:text-left font-semibold text-2xl md:text-3xl lg:text-4xl '>Our <span className="text-primary">Achievements</span></h1>
             <p className='font-rubik py-3 text-center md:text-left text-base md:text-lg text-gray-600'>Various version have evolved all over the years, sometimes by acident, sometimes by people finding out.</p>
 
-            <div className="grid lg:grid-cols-2 gap-12 ">
+            <div className="grid lg:grid-cols-2 gap- md:gap-12 ">
                 <div className="py-4 rounded-lg  grid grid-cols-2  items-center ">
                     <div className="bg-[#E9F8F3] border-primary p-2 rounded-xl m-auto">
                         <FaGraduationCap className="text-primary" size={60} />

@@ -3,6 +3,7 @@ import Hero from "./components/Hero"
 import Companies from "./components/Companies"
 import Methods from "./components/Methods"
 import Achievements from "./components/Achievements"
+import Categories from "./components/Categories"
 
 function App(){
 
@@ -14,6 +15,7 @@ function App(){
         <Companies />
         <Methods />
         <Achievements />
+        <Categories />
     </main>
   )
 }

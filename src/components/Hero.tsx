@@ -1,10 +1,14 @@
+import React from "react";
 import {BiSearchAlt2} from "react-icons/bi"
 
 function Hero() {
 
+  const [ inputState , setInputState] = React.useState<string>()
+
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    alert("Submitted")
+    alert("Thank you!")
+    setInputState("you just fucked up bro")
   }
 
   return (
@@ -18,6 +22,8 @@ function Hero() {
             <form onSubmit={handleSubmit} className='max-w-[700px] mx-auto md:mx-0 p-4 w-2/3 md:w-2/3 shadow-lg rounded-md flex justify-between items-center '>
               <input type='text' 
                       placeholder='Do you wanna find out?'
+                      value={inputState}
+                      onChange={(e) => setInputState(e.target.value)}
                       className='bg-white w-5/6 text-base md:text-lg text-gray-500 focus:outline-none active:border-none' />
               <BiSearchAlt2 onClick={handleSubmit} size={24} className="text-gray-400 cursor-pointer" />
             </form>
