@@ -4,7 +4,7 @@ import "../index.scss"
 
 export default function Methods() {
 
-  var settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 400,
@@ -39,8 +39,10 @@ export default function Methods() {
   ]};
 
   return (
-    <main className="w-full bg-tertiary p-7 md:py-18 z-10">
+    <main className="w-full bg-tertiary py-16 p-7 md:py-36 z-10">
       <section className='max-w-[430px] md:max-w-[1300px] mx-auto'>
+        <h1 className="py-2 px-4 text-3xl font-geologica font-semibold  ">Most Popular <span className="text-primary">Methods</span></h1>
+        <p className="px-4 py-2 text-gray-600 font-rubik font-light">various versions have evolved over the years sometimes by accident</p>
         <Slider {...settings} >
 
           <Card />
