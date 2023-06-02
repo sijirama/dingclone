@@ -51,7 +51,6 @@ export default function Methods() {
           <Card />
 
         </Slider>
-        
       </section>
     </main>
   )
