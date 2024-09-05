@@ -1,14 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { FaCircle, FaSquare, FaFont, FaSave, FaCopy, FaImage } from 'react-icons/fa';
+import { FaFont, FaSave, FaCopy, FaImage } from 'react-icons/fa';
 import { FabricJSCanvas, useFabricJSEditor } from 'fabricjs-react';
-import { FabricImage, Textbox } from 'fabric';
+import { FabricImage, FabricObject, Textbox } from 'fabric';
 import FontFaceObserver from 'fontfaceobserver';
+import { ObjectMenu } from './components/ObjectMenu';
 
 const fonts = ["Times New Roman"]
+export type EditorModes = "normal" | "eraser" | "segment"
 
 const App = () => {
     const { editor, onReady } = useFabricJSEditor();
     const [selectedFont, setSelectedFont] = useState('Times New Roman');
+
+    const [editorMode, setEditorMode] = useState<EditorModes>("normal")
+
+    const [menuPosition, setMenuPosition] = useState<{ x: number, y: number } | null>(null);
+    const [selectedObject, setSelectedObject] = useState<FabricObject | null>(null);
+
+    useEffect(() => {
+        if (!editor?.canvas) return;
+
+        const canvas = editor.canvas;
+
+        const handleMouseDown = (options: any) => {
+            if (editorMode === "eraser" && options.target) {
+                //canvas.remove(options.target);
+            }
+        };
+
+        canvas.on('mouse:down', handleMouseDown);
+
+        return () => {
+            canvas.off('mouse:down', handleMouseDown);
+        };
+    }, [editorMode, editor])
 
     useEffect(() => {
         const loadFonts = async () => {
@@ -27,11 +52,57 @@ const App = () => {
     }, []);
 
     useEffect(() => {
+        if (!editor?.canvas) return;
+
+        const updateMenuPosition = (object: FabricObject) => {
+            const { left, top } = object.getBoundingRect();
+            setMenuPosition({
+                x: left,
+                y: top, // Adjust to position above the object
+            });
+        };
+
+        const handleObjectMoving = (event: any) => {
+            if (event.target) {
+                updateMenuPosition(event.target);
+            }
+        };
+
+        // Function to handle object selection
+        const handleObjectClick = (event: any) => {
+            const { target } = event;
+            if (target) {
+                //const { left, top, width } = target.getBoundingRect();
+                setSelectedObject(target);
+                updateMenuPosition(target);
+                // setMenuPosition({
+                //     x: left,
+                //     y: top,  // Adjust to position above the object
+                // });
+            } else {
+                setMenuPosition(null);
+                setSelectedObject(null);
+            }
+        };
+
+        editor.canvas.on("object:scaling", handleObjectMoving)
+        editor.canvas.on('object:moving', handleObjectMoving);
+        editor.canvas.on('mouse:down', handleObjectClick);
+
+        return () => {
+            editor.canvas.off('mouse:down', handleObjectClick);
+            editor.canvas.off('object:moving', handleObjectMoving);
+        };
+
+    }, [editor]);
+
+    useEffect(() => {
+
         const handleKeyDown = (e: KeyboardEvent) => {
             if (!editor?.canvas) return;
             const activeObject = editor.canvas.getActiveObject();
 
-            if (e.key === 'Delete' || e.key === 'Backspace') {
+            if (e.key === 'Delete') {
                 if (activeObject) {
                     editor.deleteSelected()
                     editor.canvas.remove(activeObject);
@@ -86,17 +157,8 @@ const App = () => {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
+
     }, [editor]);
-
-
-
-    const onAddCircle = () => {
-        editor?.addCircle();
-    };
-
-    const onAddRectangle = () => {
-        editor?.addRectangle();
-    };
 
     const onAddText = () => {
         editor?.canvas.add(new Textbox("Hello world", {
@@ -106,6 +168,7 @@ const App = () => {
             fill: '#000000',
             fontSize: 20,
             width: 30,
+            lockRotation: true
         }));
     };
 
@@ -146,10 +209,11 @@ const App = () => {
                 imgObj.src = event.target?.result as string;
                 imgObj.onload = () => {
                     const fabricImage = new FabricImage(imgObj, {
-                        scaleX: 0.5,
-                        scaleY: 0.5,
+                        scaleX: 0.4,
+                        scaleY: 0.4,
                         left: 50,
-                        top: 50
+                        top: 50,
+                        lockRotation: true
                     });
                     editor?.canvas.add(fabricImage);
                 };
@@ -170,14 +234,6 @@ const App = () => {
     return (
         <div className="flex flex-col h-screen bg-gray-200">
             <div className="bg-gray-300 border-b-2 border-gray-400 p-2 flex flex-wrap justify-start gap-2">
-                <button onClick={onAddCircle} className="px-3 py-1 bg-gray-100 text-black border-2 border-gray-400 hover:bg-gray-200 transition-colors flex items-center">
-                    <FaCircle className="mr-2" />
-                    Circle
-                </button>
-                <button onClick={onAddRectangle} className="px-3 py-1 bg-gray-100 text-black border-2 border-gray-400 hover:bg-gray-200 transition-colors flex items-center">
-                    <FaSquare className="mr-2" />
-                    Rectangle
-                </button>
                 <button onClick={onAddText} className="px-3 py-1 bg-gray-100 text-black border-2 border-gray-400 hover:bg-gray-200 transition-colors flex items-center">
                     <FaFont className="mr-2" />
                     Text
@@ -207,6 +263,17 @@ const App = () => {
             </div>
             <div className="flex-grow p-4 bg-white">
                 <FabricJSCanvas className="w-full h-full border-2 border-gray-100" onReady={onReady} />
+                {menuPosition && (
+                    <ObjectMenu
+                        x={menuPosition.x}
+                        y={menuPosition.y}
+                        selectedObject={selectedObject}
+                        editor={editor}
+                        menuPosition={menuPosition}
+                        setMenuPosition={setMenuPosition}
+                        setEditorMode={setEditorMode}
+                    />
+                )}
             </div>
         </div>
     );
